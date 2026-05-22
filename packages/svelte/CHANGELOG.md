@@ -1,5 +1,29 @@
 # svelte
 
+## 5.55.10
+
+### Patch Changes
+
+- fix: unlink errored and otherwise finished batch ([#18264](https://github.com/sveltejs/svelte/pull/18264))
+
+- perf: walk composedPath() directly in delegated event propagation ([#18268](https://github.com/sveltejs/svelte/pull/18268))
+
+- fix: transfer effects when merging batches ([#18254](https://github.com/sveltejs/svelte/pull/18254))
+
+- fix: allow `$derived(await ...)` in disconnected effect roots ([#18273](https://github.com/sveltejs/svelte/pull/18273))
+
+- fix: remove temporary raw-text hydration markers ([#18269](https://github.com/sveltejs/svelte/pull/18269))
+
+- fix: declare `let:` directives before `{@const}` declarations on slotted elements ([#18271](https://github.com/sveltejs/svelte/pull/18271))
+
+- fix: correctly coordinate component-level effects inside async blocks ([#18260](https://github.com/sveltejs/svelte/pull/18260))
+
+- fix: make unnecessary commit work less likely ([#18263](https://github.com/sveltejs/svelte/pull/18263))
+
+- chore: add tag name to `a11y_click_events_have_key_events` warning ([#18272](https://github.com/sveltejs/svelte/pull/18272))
+
+- fix: catch rejected promises while merging/committing ([#18266](https://github.com/sveltejs/svelte/pull/18266))
+
 ## 5.55.9
 
 ### Patch Changes
