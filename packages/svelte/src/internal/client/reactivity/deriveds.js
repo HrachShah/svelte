@@ -150,7 +150,7 @@ export function async_derived(fn, label, location) {
 					if (e !== STALE_REACTION) d.reject(e);
 				})
 				.finally(unset_context);
-		} catch (error) {
+		} catch (error: unknown) {
 			d.reject(error);
 			unset_context();
 		}

@@ -121,7 +121,7 @@ export function hydrate(component, options) {
 		set_hydrating(false);
 
 		return /**  @type {Exports} */ (instance);
-	} catch (error) {
+	} catch (error: unknown) {
 		// re-throw Svelte errors - they are certainly not related to hydration
 		if (
 			error instanceof Error &&

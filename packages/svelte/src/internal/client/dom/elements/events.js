@@ -272,7 +272,7 @@ export function handle_event_propagation(event) {
 				) {
 					delegated.call(current_target, event);
 				}
-			} catch (error) {
+			} catch (error: unknown) {
 				if (throw_error) {
 					other_errors.push(error);
 				} else {

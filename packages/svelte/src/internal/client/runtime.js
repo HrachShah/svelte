@@ -343,7 +343,7 @@ export function update_reaction(reaction) {
 		}
 
 		return result;
-	} catch (error) {
+	} catch (error: unknown) {
 		return handle_error(error);
 	} finally {
 		reaction.f ^= REACTION_IS_UPDATING;
