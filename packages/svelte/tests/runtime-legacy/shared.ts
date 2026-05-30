@@ -580,7 +580,7 @@ async function run_test_variant(
 				}
 			}
 		}
-	} catch (err) {
+	} catch (err: unknown) {
 		if (config.runtime_error) {
 			assert.include((err as Error).message, config.runtime_error);
 		} else if (config.error && !unintended_error) {
