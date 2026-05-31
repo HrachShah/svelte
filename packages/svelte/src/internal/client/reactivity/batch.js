@@ -1069,7 +1069,7 @@ function infinite_loop_guard() {
 
 	try {
 		e.effect_update_depth_exceeded();
-	} catch (error) {
+	} catch (error: unknown) {
 		if (DEV) {
 			// stack contains no useful information, replace it
 			define_property(error, 'stack', { value: '' });

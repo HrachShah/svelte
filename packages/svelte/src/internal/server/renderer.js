@@ -274,7 +274,7 @@ export class Renderer {
 				result.catch(noop);
 				child.promise = result;
 			}
-		} catch (error) {
+		} catch (error: unknown) {
 			// synchronous errors are handled here, async errors will be handled in #collect_content_async
 			set_ssr_context(parent_context);
 
@@ -711,7 +711,7 @@ export class Renderer {
 						// Success - merge into the main content
 						content.head += boundary_content.head;
 						content.body += boundary_content.body;
-					} catch (error) {
+					} catch (error: unknown) {
 						const { context, failed, transformError } = item.#boundary;
 
 						set_ssr_context(context);

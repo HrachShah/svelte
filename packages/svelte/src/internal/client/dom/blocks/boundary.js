@@ -189,7 +189,7 @@ export class Boundary {
 	#hydrate_resolved_content() {
 		try {
 			this.#main_effect = branch(() => this.#children(this.#anchor));
-		} catch (error) {
+		} catch (error: unknown) {
 			this.error(error);
 		}
 	}
@@ -259,7 +259,7 @@ export class Boundary {
 			} else {
 				this.#resolve(/** @type {Batch} */ (current_batch));
 			}
-		} catch (error) {
+		} catch (error: unknown) {
 			this.error(error);
 		}
 	}
@@ -463,7 +463,7 @@ export class Boundary {
 				calling_on_error = true;
 				onerror?.(transformed_error, reset);
 				calling_on_error = false;
-			} catch (error) {
+			} catch (error: unknown) {
 				invoke_error_boundary(error, this.#effect && this.#effect.parent);
 			}
 
@@ -484,7 +484,7 @@ export class Boundary {
 								() => reset
 							);
 						});
-					} catch (error) {
+					} catch (error: unknown) {
 						invoke_error_boundary(error, /** @type {Effect} */ (this.#effect.parent));
 						return null;
 					}

@@ -63,7 +63,7 @@ export function flatten(blockers, sync, async, fn) {
 
 		try {
 			fn(values);
-		} catch (error) {
+		} catch (error: unknown) {
 			invoke_error_boundary(error, parent);
 		}
 
@@ -241,7 +241,7 @@ export async function* for_await_track_reactivity_loss(iterable) {
 			}
 			set_reactivity_loss_tracker(prev);
 		}
-	} catch (error) {
+	} catch (error: unknown) {
 		invoke_return = false;
 		throw error;
 	} finally {
