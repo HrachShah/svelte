@@ -24,8 +24,20 @@ function cubic_in_out(t) {
  * @returns {[number, string]}
  */
 function split_css_unit(value) {
-	const split = typeof value === 'string' && value.match(/^\s*(-?[\d.]+)([^\s]*)\s*$/);
-	return split ? [parseFloat(split[1]), split[2] || 'px'] : [/** @type {number} */ (value), 'px'];
+	if (typeof value === 'number') return [value, 'px'];
+	if (typeof value !== 'string') return [/** @type {number} */ (value), 'px'];
+
+	// match: optional sign, digits with at most one decimal, optional exponent, then unit
+	const split = value.match(/^\s*([+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)(.*?)\s*$/);
+	// CSS unit names must be alphabetic (or %); reject malformed numbers like '5.5.5'
+	// where the unit portion would contain stray characters
+	if (split && /^[a-zA-Z%]*$/.test(split[2])) {
+		const parsed = parseFloat(split[1]);
+		if (Number.isFinite(parsed)) {
+			return [parsed, split[2] || 'px'];
+		}
+	}
+	return [/** @type {number} */ (/** @type {unknown} */ (NaN)), 'px'];
 }
 
 /**
