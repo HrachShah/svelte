@@ -199,7 +199,7 @@ export function draw(node, { delay = 0, speed, duration, easing = cubic_in_out }
 	let len = node.getTotalLength();
 	const style = getComputedStyle(node);
 	if (style.strokeLinecap !== 'butt') {
-		len += parseInt(style.strokeWidth);
+		len += parseFloat(style.strokeWidth);
 	}
 	if (duration === undefined) {
 		if (speed === undefined) {
