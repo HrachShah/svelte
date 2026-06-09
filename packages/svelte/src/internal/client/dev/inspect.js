@@ -61,7 +61,7 @@ export function inspect(get_value, inspector, show_stack = false) {
 		try {
 			// call `get_value` so that this runs alongside the inspect effect
 			get_value();
-		} catch {
+		} catch (_e) {
 			// ignore
 		}
 

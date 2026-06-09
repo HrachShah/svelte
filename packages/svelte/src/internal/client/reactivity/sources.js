@@ -276,7 +276,7 @@ export function flush_eager_effects() {
 
 		try {
 			dirty = is_dirty(effect);
-		} catch {
+		} catch (_e) {
 			// Dirty-checking can evaluate derived dependencies and throw in cases where
 			// parent effects are about to destroy this eager effect. Run the effect so
 			// its own error handling can deal with transient failures.
