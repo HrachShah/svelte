@@ -231,7 +231,7 @@ export async function* for_await_track_reactivity_loss(iterable) {
 			var prev = reactivity_loss_tracker;
 			try {
 				yield value;
-			} catch (e) {
+			} catch (e: unknown) {
 				set_reactivity_loss_tracker(prev);
 				// If the yield throws, we need to call `return` but not return its value, instead rethrow
 				if (iterator.return !== undefined) {

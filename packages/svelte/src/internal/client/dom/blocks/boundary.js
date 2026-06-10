@@ -311,7 +311,7 @@ export class Boundary {
 		try {
 			Batch.ensure();
 			return fn();
-		} catch (e) {
+		} catch (e: unknown) {
 			handle_error(e);
 			return null;
 		} finally {
@@ -498,7 +498,7 @@ export class Boundary {
 			var result;
 			try {
 				result = this.transform_error(error);
-			} catch (e) {
+			} catch (e: unknown) {
 				invoke_error_boundary(e, this.#effect && this.#effect.parent);
 				return;
 			}

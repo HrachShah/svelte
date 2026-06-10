@@ -328,7 +328,7 @@ export function apply(
 
 	try {
 		handler = thunk();
-	} catch (e) {
+	} catch (e: unknown) {
 		error = e;
 	}
 

@@ -324,7 +324,7 @@ export class Batch {
 		for (const root of roots) {
 			try {
 				this.#traverse(root, effects, render_effects);
-			} catch (e) {
+			} catch (e: unknown) {
 				reset_all(root);
 				// If there's no async work left, this branch is now dead and needs
 				// to be unlinked to not become a zombie that is never cleaned up.

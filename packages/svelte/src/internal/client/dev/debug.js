@@ -302,7 +302,7 @@ export function log_reactions(signal) {
 					}
 					try {
 						if (current) check_reachable(current);
-					} catch (e) {
+					} catch (e: unknown) {
 						// eslint-disable-next-line no-console
 						console.log(
 							`%c⚠️ Circular reference detected in effect tree`,

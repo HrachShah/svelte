@@ -135,7 +135,7 @@ function create_effect(type, fn) {
 	} else if (fn !== null) {
 		try {
 			update_effect(effect);
-		} catch (e) {
+		} catch (e: unknown) {
 			destroy_effect(effect);
 			throw e;
 		}

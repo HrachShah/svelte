@@ -55,7 +55,7 @@ export function invoke_error_boundary(error, effect) {
 			try {
 				/** @type {Boundary} */ (effect.b).error(error);
 				return;
-			} catch (e) {
+			} catch (e: unknown) {
 				error = e;
 			}
 		}

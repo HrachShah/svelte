@@ -815,7 +815,7 @@ export function deep_read(value, visited = new Set()) {
 		for (let key in value) {
 			try {
 				deep_read(value[key], visited);
-			} catch (e) {
+			} catch (e: unknown) {
 				// continue
 			}
 		}
@@ -833,7 +833,7 @@ export function deep_read(value, visited = new Set()) {
 				if (get) {
 					try {
 						get.call(value);
-					} catch (e) {
+					} catch (e: unknown) {
 						// continue
 					}
 				}

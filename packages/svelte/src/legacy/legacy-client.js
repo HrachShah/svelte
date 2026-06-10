@@ -226,7 +226,7 @@ export function handlers(...handlers) {
 			try {
 				// @ts-expect-error `this` is not typed
 				handler?.call(this, event);
-			} catch (e) {
+			} catch (e: unknown) {
 				errors.push(e);
 			}
 

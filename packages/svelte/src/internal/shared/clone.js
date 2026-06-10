@@ -127,7 +127,7 @@ function clone(value, cloned, path, paths, original = null, no_tojson = false) {
 
 	try {
 		return /** @type {Snapshot<T>} */ (structuredClone(value));
-	} catch (e) {
+	} catch (e: unknown) {
 		if (DEV) {
 			paths.push(path);
 		}
