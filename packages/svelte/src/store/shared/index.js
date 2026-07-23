@@ -138,10 +138,10 @@ export function derived(stores, fn, initial_value) {
 		let started = false;
 		/** @type {T[]} */
 		const values = [];
-		let pending = 0;
+		const pending = new Set(stores_array.map((_, i) => i));
 		let cleanup = noop;
 		const sync = () => {
-			if (pending) {
+			if (pending.size > 0) {
 				return;
 			}
 			cleanup();
@@ -157,13 +157,13 @@ export function derived(stores, fn, initial_value) {
 				store,
 				(value) => {
 					values[i] = value;
-					pending &= ~(1 << i);
+					pending.delete(i);
 					if (started) {
 						sync();
 					}
 				},
 				() => {
-					pending |= 1 << i;
+					pending.add(i);
 				}
 			)
 		);

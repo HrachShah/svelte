@@ -280,6 +280,19 @@ describe('derived', () => {
 		a.set(6);
 		assert.deepEqual(values, [6, 12, 20]);
 	});
+	it('waits for all stores when more than 31 dependencies are present', () => {
+		const stores = Array.from({ length: 32 }, (_, index) => writable(index));
+		const sum = derived(stores, (values) => values.reduce((total, value) => total + value, 0));
+		const values: number[] = [];
+
+		const unsubscribe = sum.subscribe((value) => values.push(value as number));
+		assert.deepEqual(values, [496]);
+
+		stores[31].set(100);
+		assert.deepEqual(values, [496, 565]);
+
+		unsubscribe();
+	});
 
 	it('passes optional set function', () => {
 		const number = writable(1);
