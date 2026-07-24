@@ -64,6 +64,29 @@ test('map.values()', () => {
 	cleanup();
 });
 
+test('map.keys() ignores changes to existing values', () => {
+	const map = new SvelteMap([[1, 'a']]);
+	const log: any = [];
+
+	const cleanup = effect_root(() => {
+		render_effect(() => {
+			log.push(Array.from(map.keys()));
+		});
+	});
+
+	flushSync(() => {
+		map.set(1, 'b');
+	});
+
+	flushSync(() => {
+		map.set(2, 'c');
+	});
+
+	assert.deepEqual(log, [[1], [1, 2]]);
+
+	cleanup();
+});
+
 test('map.get(...)', () => {
 	const map = new SvelteMap([
 		[1, 1],

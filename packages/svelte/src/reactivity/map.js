@@ -54,6 +54,7 @@ export class SvelteMap extends Map {
 	/** @type {Map<K, Source<number>>} */
 	#sources = new Map();
 	#version = state(0);
+	#key_version = state(0);
 	#size = state(0);
 	#update_version = update_version || -1;
 
@@ -68,6 +69,7 @@ export class SvelteMap extends Map {
 			value = new Map(value);
 
 			tag(this.#version, 'SvelteMap version');
+			tag(this.#key_version, 'SvelteMap keys version');
 			tag(this.#size, 'SvelteMap.size');
 		}
 
@@ -161,6 +163,7 @@ export class SvelteMap extends Map {
 		var sources = this.#sources;
 		var s = sources.get(key);
 		var prev_res = super.get(key);
+		var had_key = super.has(key);
 		var res = super.set(key, value);
 		var version = this.#version;
 
@@ -174,6 +177,9 @@ export class SvelteMap extends Map {
 			sources.set(key, s);
 			set(this.#size, super.size);
 			increment(version);
+			if (!had_key) {
+				increment(this.#key_version);
+			}
 		} else if (prev_res !== value) {
 			increment(s);
 
@@ -206,6 +212,7 @@ export class SvelteMap extends Map {
 		if (res) {
 			set(this.#size, super.size);
 			increment(this.#version);
+			increment(this.#key_version);
 		}
 
 		return res;
@@ -223,6 +230,7 @@ export class SvelteMap extends Map {
 			set(s, -1);
 		}
 		increment(this.#version);
+		increment(this.#key_version);
 		sources.clear();
 	}
 
@@ -249,7 +257,7 @@ export class SvelteMap extends Map {
 	}
 
 	keys() {
-		get(this.#version);
+		get(this.#key_version);
 		return super.keys();
 	}
 
